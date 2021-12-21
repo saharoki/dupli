@@ -24,11 +24,12 @@ class AuthController extends Controller
 
         try {
 
+            $hasher = app()->make('hash');
             $user = new User;
             $user->name = $request->input('name');
             $user->email = $request->input('email');
             $plainPassword = $request->input('password');
-            $user->password = app('hash')->make($plainPassword);
+            $user->password = $hasher->make($plainPassword);
 
             $user->save();
 
