@@ -15,7 +15,10 @@ class Movies extends Model
     {
         $user = auth()->user();
         return $this->hasOne(Rent::class, 'movie_id', 'id')
-            ->where('user_id', 1);
+            ->where([
+                ['user_id', 1],
+                ['rent_end', '>=', date('Y-m-d')],
+            ]);
            // ->where('user_id', $user->id);
     }
 }
