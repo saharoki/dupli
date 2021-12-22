@@ -54,9 +54,7 @@ class MainController extends Controller
 
     public function rent_movie(Request $request, $movie_id)
     {
-        //$user = auth()->user();
-        $user = new \StdClass();
-        $user->id = 1;
+        $user = auth()->user();
         $today = date('Y-m-d');
 
         $rented = Rent::where([
