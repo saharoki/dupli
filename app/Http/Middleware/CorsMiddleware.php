@@ -22,7 +22,7 @@ class CorsMiddleware
             'Access-Control-Allow-Methods'     => 'POST, GET, OPTIONS, PUT, DELETE',
             'Access-Control-Allow-Credentials' => 'true',
             'Access-Control-Max-Age'           => '86400',
-            'Access-Control-Allow-Headers'     => 'DNT,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type,Range'
+            'Access-Control-Allow-Headers'     => 'Authorization,Origin,X-Requested-With,Content-Type,DNT,If-Modified-Since,Cache-Control,Range'
         ];
 
         if ($request->isMethod('OPTIONS'))
