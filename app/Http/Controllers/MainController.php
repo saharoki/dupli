@@ -46,8 +46,8 @@ class MainController extends Controller
             abort(404, 'movie not found');
         }
 
-        if(!is_null($movie->rented_by_user)){
-            $movie->rented_by_user->days->left = $movie->rented_by_user->rent_end->diff(new \DateTime())->days;
+        if(!is_null($movie->rentedByUser)){
+            $movie->rentedByUser->days->left = $movie->rented_by_user->rent_end->diff(new \DateTime())->days;
         }
 
         return response()->json($movie);
