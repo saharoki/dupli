@@ -47,7 +47,7 @@ class MainController extends Controller
         }
 
         if(!is_null($movie->rentedByUser)){
-            $movie->rentedByUser->days->left = $movie->rented_by_user->rent_end->diff(new \DateTime())->days;
+            $movie->rentedByUser->days->left = $movie->rentedByUser->rent_end->diff(new \DateTime())->days;
         }
 
         return response()->json($movie);
