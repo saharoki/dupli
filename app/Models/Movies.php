@@ -20,4 +20,10 @@ class Movies extends Model
                 ['rent_end', '>=', date('Y-m-d')],
             ]);
     }
+
+    public function rentedToday()
+    {
+        return $this->hasMany(Rent::class, 'movie_id', 'id')
+            ->where('rent_start', '>=', date('Y-m-d'));
+    }
 }

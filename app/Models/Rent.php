@@ -10,4 +10,10 @@ class Rent extends Model
     protected $hidden = [
         'created_at', 'updated_at'
     ];
+
+    public function movie()
+    {
+        return $this->belongsTo(Movies::class);
+    }
+
 }
