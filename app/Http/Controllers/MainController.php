@@ -46,12 +46,13 @@ class MainController extends Controller
             abort(404, 'movie not found');
         }
 
+        $days_left = 0;
         if(!is_null($movie->rentedByUser)){
             $rent_end = new \DateTime($movie->rentedByUser->rent_end);
-            $movie->rentedByUser->days->left = $rent_end->diff(new \DateTime())->days;
+            $days_left = $rent_end->diff(new \DateTime())->days;
         }
 
-        return response()->json($movie);
+        return response()->json(['movie'=>$movie, 'rent' => $days_left]);
     }
 
     public function rent_movie(Request $request, $movie_id)
@@ -66,7 +67,8 @@ class MainController extends Controller
             ])->first();
 
         if($rented){
-            $days =$rented->rent_end->diff(new \DateTime())->days;
+            $rent_end = new \DateTime($rented->rent_end);
+            $days = $rent_end->diff(new \DateTime())->days;
             return response()->json(['rent_end' => $days]);
         }
 
