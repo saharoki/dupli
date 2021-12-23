@@ -52,7 +52,7 @@ class MainController extends Controller
             $days_left = $rent_end->diff(new \DateTime())->days;
         }
 
-        return response()->json(['movie'=>$movie, 'rent' => $days_left]);
+        return response()->json(['movie'=>$movie, 'rent' => $days_left+1]);
     }
 
     public function rent_movie(Request $request, $movie_id)
@@ -69,7 +69,7 @@ class MainController extends Controller
         if($rented){
             $rent_end = new \DateTime($rented->rent_end);
             $days = $rent_end->diff(new \DateTime())->days;
-            return response()->json(['rent_end' => $days]);
+            return response()->json(['rent_end' => $days+1]);
         }
 
         //check if movie exists
