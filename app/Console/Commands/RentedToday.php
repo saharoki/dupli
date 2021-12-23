@@ -29,9 +29,10 @@ class RentedToday extends Command
     public function handle()
     {
         $rents = Rent::where('rent_start', '=', date('Y-m-d'));
-        $total = $rents.count();
+        $total = count($rents);
         foreach ($rents as $rented){
             $this->info("Movie: {$rented->movie->name}");
         }
+        $this->info("Total rented: {$total}");
     }
 }
