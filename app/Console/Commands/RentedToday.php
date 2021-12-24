@@ -5,6 +5,7 @@ namespace App\Console\Commands;
 use App\Models\Movies;
 use App\Models\Rent;
 use Illuminate\Console\Command;
+use Illuminate\Support\Facades\Mail;
 
 class RentedToday extends Command
 {
@@ -30,10 +31,16 @@ class RentedToday extends Command
     {
         $rents = Rent::where('rent_start', '=', date('Y-m-d'))->get();
         $total = 0;
+        $text = '';
         foreach ($rents as $rented){
-            $this->info("Movie: {$rented->movie->name}");
+            $text += "Movie: {$rented->movie->name} \n";
             $total++;
         }
-        $this->info("Total rented: {$total}");
+        $text += "Total rented: {$total}";
+
+        Mail::mailer('sendmail')->raw($text, function($message) {
+            $message->to('example@google.com')->subject('Rented today movies');
+            $message->from('test@google.com');
+        });
     }
 }
